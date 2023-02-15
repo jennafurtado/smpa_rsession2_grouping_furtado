@@ -35,6 +35,9 @@ Let's also walk through the visual wizard available in RStudio for importing csv
 srqflights <- read_excel("data/sarasota_q1_flights.xlsx")
 
 srqflights
+
+view(srqflights)
+
 ```
 
 Great, now we have our several hundred NYC to Sarasota flights for each day in the first quarter.
@@ -113,7 +116,8 @@ So let's do that simply by using the `=` (single this time, note) to assign a na
 
 srqflights %>% 
   group_by(carrier, flight, origin) %>% 
-  summarise(count = n())
+  summarise(count = n()) %>% 
+  arrange(desc(count))
 
 ```
 
@@ -214,20 +218,30 @@ We now have a lot more information at our fingertips than we did a few minutes a
 
 ```{r}
 
+flights <- nycflights13::flights
 
-
-```
-
-
-```{r}
-
-
+view(flights)
 
 ```
 
 
 ```{r}
 
+flights %>% 
+  filter(month == 8, carrier == "DL") %>% 
+  group_by(carrier, month) %>% 
+  summarise(flight_count = n(), avg_delay = mean(dep_delay, na.rm = TRUE))
+
+```
+
+
+```{r}
+
+flights %>% 
+  filter(carrier == "DL", dest == "DCA") %>% 
+  group_by(month == 8) %>% 
+  summarise(flight_count = n(), avg_delay = mean(dep_delay, na.rm = TRUE))
+  
 
 
 ```

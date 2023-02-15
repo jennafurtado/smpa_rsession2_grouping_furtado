@@ -20,8 +20,12 @@ library(ggthemes)
 library(esquisse)
 
 #import data
-county_pop <-  read_xlsx('county_pop.xlsx') %>% 
+county_pop <-  read_xlsx('data/county_pop.xlsx') %>% 
   clean_names()
+
+flights <- nycflights13::flights
+
+delayed_flights <- 
 
 
 #make a smaller table to work with
@@ -150,7 +154,7 @@ ggplot(metro_pop, aes(x = reorder(geography, pop_estimate2016), y = pop_estimate
 We'll look at opiate death data.
 
 ```{r}
-deaths <- read_csv('opiate_deaths.csv',
+deaths <- read_csv(data/'opiate_deaths.csv',
                    col_types=cols(.default=col_character(),
                         BIRTHDATE=col_date("%m/%d/%Y"),
                         DEATHDATE=col_date("%m/%d/%Y"),
